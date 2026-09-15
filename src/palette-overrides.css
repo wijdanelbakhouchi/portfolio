@@ -1,0 +1,29 @@
+:root {
+  --bg: #10151b;
+  --surface: #171e27;
+  --surface-raised: #202b38;
+  --text: #edf4f7;
+  --muted: #a4b1bc;
+  --accent: #a9dcff;
+  --line: #334453;
+  --glow: rgba(120, 195, 239, .11);
+  --header: rgba(16, 21, 27, .92);
+}
+
+:root[data-theme='light'] {
+  --bg: #f3f6f8;
+  --surface: #e7eef3;
+  --surface-raised: #dce8f0;
+  --text: #1d2933;
+  --muted: #586b78;
+  --accent: #4b83b0;
+  --line: #c6d5df;
+  --glow: rgba(76, 139, 188, .11);
+  --header: rgba(243, 246, 248, .94);
+}
+
+.hero-art:before { background: radial-gradient(ellipse, rgba(120,195,239,.13), transparent 65%); }
+.fallback-sphere { background: radial-gradient(circle at 30% 25%, #e4f6ff, #9bcde8 16%, #46728f 40%, #14212d 77%); box-shadow: inset -15px -20px 30px #080d14, 0 0 70px #74c8f040; }
+.orbit { border-color: #8fc7e870; }
+.satellite { background: #c5ebff; box-shadow: 0 0 20px #7bc9ee70; }
+.parking-grid i:nth-child(3n) { background: #a9dcff; }
