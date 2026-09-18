@@ -7,10 +7,10 @@ interface Step {
 }
 
 const STEPS: Step[] = [
-  { tag: '01/04', message: 'CONNECTING TO SECURE COMPUTATIONAL CORE', status: 'OK' },
-  { tag: '02/04', message: 'NEURAL GRAPH VERIFIED [7 INTELLIGENT SYSTEMS]', status: 'ONLINE' },
+  { tag: '01/04', message: 'CORE COMPUTATIONAL SYSTEM INITIALIZED', status: 'ONLINE' },
+  { tag: '02/04', message: 'DATA LAYER & MULTI-AGENT NETWORK VERIFIED', status: 'CONNECTED' },
   { tag: '03/04', message: 'RUNTIME DEFENSE ACTIVE: ALLOW / BLOCK / SANITIZE', status: 'ARMED' },
-  { tag: '04/04', message: 'CASABLANCA SECURE NODE READY', status: '100%' },
+  { tag: '04/04', message: 'CASABLANCA SECURE INTERFACE READY', status: '100%' },
 ];
 
 export function initLoader(): void {
@@ -38,7 +38,7 @@ export function initLoader(): void {
 
   let currentStep = 0;
   const totalSteps = STEPS.length;
-  const intervalMs = 120;
+  const intervalMs = 130;
   let timer: number | null = null;
 
   function renderStep(stepIndex: number) {

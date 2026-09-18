@@ -50,7 +50,8 @@ test('external links isolate the opener and content is escaped', () => {
   assert.doesNotMatch(readFileSync('index.html', 'utf8'), /<script(?![^>]*src=)[^>]*>/);
 });
 test('research scope and authentic contact method are explicit', () => {
-  assert.match(html, /controlled research prototype/);
+  assert.match(html, /controlled research prototype/i);
   assert.match(html, /mailto:wijdane.elbakhouchi24@gmail.com/);
-  assert.doesNotMatch(html, /<form|Verified Credentials|data-theme/);
+  assert.match(html, /<form\b[^>]*id="contact-form"/);
+  assert.doesNotMatch(html, /Verified Credentials|data-theme/);
 });

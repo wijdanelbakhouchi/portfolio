@@ -86,6 +86,33 @@ test('mobile menu, disclosures, reduced motion and theme toggle', async ({ page 
   expect(await page.locator('canvas').count()).toBe(0);
 });
 
+test('contact form validates required inputs and supports message dispatch', async ({ page }) => {
+  await page.goto('/');
+  const submitBtn = page.locator('.form-submit');
+  await submitBtn.click();
+  await expect(page.locator('#name-error')).toHaveText('Please enter your name.');
+
+  await page.locator('#contact-name').fill('Alex Recruiter');
+  await submitBtn.click();
+  await expect(page.locator('#email-error')).toHaveText('Please enter your email address.');
+
+  await page.locator('#contact-email').fill('invalid-email-address');
+  await submitBtn.click();
+  await expect(page.locator('#email-error')).toHaveText('Please enter a valid email address.');
+
+  await page.locator('#contact-email').fill('recruiter@tech.corp');
+  await submitBtn.click();
+  await expect(page.locator('#subject-error')).toHaveText('Please enter a subject.');
+
+  await page.locator('#contact-subject').fill('AI Engineer Role');
+  await submitBtn.click();
+  await expect(page.locator('#message-error')).toHaveText('Please enter your message.');
+
+  await page.locator('#contact-message').fill('Hello Wijdane, we are impressed by AgentShield.');
+  await submitBtn.click();
+  await expect(page.locator('#form-status')).toBeVisible();
+});
+
 const heroViewports = [
   { width: 1920, height: 1080 },
   { width: 1536, height: 864 },
