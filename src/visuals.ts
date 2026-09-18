@@ -1,6 +1,6 @@
 export function workstation() {
   return `<figure class="workstation">
-  <svg viewBox="0 0 800 550" role="img" aria-labelledby="workstation-title workstation-desc">
+  <svg viewBox="-40 -10 920 570" role="img" aria-labelledby="workstation-title workstation-desc">
     <title id="workstation-title">3D Tech Sphere</title>
     
     <defs>
