@@ -1,115 +1,104 @@
-/** Original code-native diagrams, explicitly conceptual rather than screenshots. */
 export function workstation() {
   return `<figure class="workstation">
   <svg viewBox="0 0 800 550" role="img" aria-labelledby="workstation-title workstation-desc">
-    <title id="workstation-title">An ecosystem of tools and concepts</title>
-    <desc id="workstation-desc">A conceptual network map displaying technologies like Docker, PySpark, MySQL, and Python interconnected with data pipelines.</desc>
+    <title id="workstation-title">Tech Stack Cloud</title>
     
     <defs>
-      <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.15"/>
-        <stop offset="100%" stop-color="var(--accent-blue)" stop-opacity="0"/>
+      <filter id="blur-sm" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2.5" />
+      </filter>
+      <filter id="blur-md" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="5" />
+      </filter>
+      <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="var(--surface-blue)" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="var(--surface)" stop-opacity="0"/>
       </radialGradient>
-      <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.6"/>
-        <stop offset="100%" stop-color="var(--accent-brown)" stop-opacity="0.6"/>
-      </linearGradient>
-      <pattern id="dot-grid" width="30" height="30" patternUnits="userSpaceOnUse">
-        <circle cx="15" cy="15" r="1.5" fill="var(--border)" opacity="0.6"/>
-      </pattern>
     </defs>
 
-    <!-- Background Grid -->
-    <rect width="100%" height="100%" fill="url(#dot-grid)" rx="8" />
+    <rect width="100%" height="100%" fill="transparent" />
+    
+    <circle cx="400" cy="275" r="300" fill="url(#glow)"/>
 
-    <!-- Connecting Lines -->
-    <g stroke="url(#line-grad)" stroke-width="1.5" fill="none" opacity="0.7">
-      <!-- Main Hub Connections -->
-      <path d="M 400 275 L 200 150" />
-      <path d="M 400 275 L 600 150" />
-      <path d="M 400 275 L 200 420" />
-      <path d="M 400 275 L 600 420" />
+    <g font-family="'Manrope', sans-serif" font-weight="700" text-anchor="middle">
       
-      <!-- Outer Node Connections -->
-      <path d="M 200 150 L 100 250" />
-      <path d="M 600 150 L 700 250" />
-      <path d="M 200 420 L 100 320" />
-      <path d="M 600 420 L 700 320" />
-      <path d="M 400 275 L 400 80" />
-      <path d="M 400 275 L 400 480" />
-      <path d="M 200 150 L 400 80" />
-      <path d="M 600 150 L 400 80" />
-      <path d="M 200 420 L 400 480" />
-      <path d="M 600 420 L 400 480" />
-      
-      <!-- Extra cross-links -->
-      <path d="M 100 250 L 100 320" stroke-dasharray="4 4" />
-      <path d="M 700 250 L 700 320" stroke-dasharray="4 4" />
+      <!-- FOREGROUND (Sharp, in focus) -->
+      <!-- PySpark -->
+      <g transform="translate(250, 150)">
+        <rect x="-70" y="-23" width="140" height="46" rx="23" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)" stroke-width="1.5"/>
+        <text y="5" fill="var(--accent-blue)" font-size="16">PySpark</text>
+      </g>
+
+      <!-- Docker -->
+      <g transform="translate(550, 180)">
+        <rect x="-65" y="-23" width="130" height="46" rx="23" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
+        <text y="5" fill="var(--text-primary)" font-size="16">Docker</text>
+      </g>
+
+      <!-- Python -->
+      <g transform="translate(400, 260)">
+        <rect x="-80" y="-25" width="160" height="50" rx="25" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
+        <text y="6" fill="var(--text-primary)" font-size="18">Python</text>
+      </g>
+
+      <!-- MySQL -->
+      <g transform="translate(260, 370)">
+        <rect x="-65" y="-23" width="130" height="46" rx="23" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
+        <text y="5" fill="var(--text-primary)" font-size="16">MySQL</text>
+      </g>
+
+      <!-- LangChain -->
+      <g transform="translate(540, 350)">
+        <rect x="-75" y="-23" width="150" height="46" rx="23" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)" stroke-width="1.5"/>
+        <text y="5" fill="var(--accent-blue)" font-size="16">LangChain</text>
+      </g>
+
+      <!-- MIDGROUND (Slightly smaller, 0.7 opacity, no border, just text) -->
+      <g opacity="0.8">
+        <text x="120" y="240" fill="var(--text-primary)" font-size="16">Delta Lake</text>
+        <text x="670" y="270" fill="var(--text-primary)" font-size="16">FastAPI</text>
+        <text x="400" y="120" fill="var(--text-primary)" font-size="16">Kafka</text>
+        <text x="420" y="420" fill="var(--text-primary)" font-size="16">ChromaDB</text>
+        <text x="160" y="450" fill="var(--text-primary)" font-size="16">TypeScript</text>
+        <text x="680" y="450" fill="var(--text-primary)" font-size="16">React</text>
+      </g>
+
+      <!-- BACKGROUND (Blurred, muted, small) -->
+      <g opacity="0.6" filter="url(#blur-sm)">
+        <text x="150" y="100" fill="var(--text-muted)" font-size="18">Airflow</text>
+        <text x="650" y="90" fill="var(--text-muted)" font-size="18">Kubernetes</text>
+        <text x="80" y="340" fill="var(--text-muted)" font-size="18">PostgreSQL</text>
+        <text x="730" y="360" fill="var(--text-muted)" font-size="18">LLMs</text>
+        <text x="520" y="480" fill="var(--text-muted)" font-size="18">AWS</text>
+        <text x="280" y="500" fill="var(--text-muted)" font-size="18">Git</text>
+        <text x="400" y="190" fill="var(--text-muted)" font-size="17">Java</text>
+        <text x="320" y="300" fill="var(--text-muted)" font-size="17">C++</text>
+        <text x="500" y="300" fill="var(--text-muted)" font-size="17">SQL</text>
+      </g>
+
+      <!-- DEEP BACKGROUND (Heavy blur, big text) -->
+      <g opacity="0.25" filter="url(#blur-md)">
+        <text x="250" y="60" fill="var(--text-muted)" font-size="32">Data Engineering</text>
+        <text x="620" y="150" fill="var(--text-muted)" font-size="36">RAG</text>
+        <text x="120" y="180" fill="var(--text-muted)" font-size="28">Security</text>
+        <text x="720" y="220" fill="var(--text-muted)" font-size="28">CI/CD</text>
+        <text x="180" y="520" fill="var(--text-muted)" font-size="34">Multi-Agent</text>
+        <text x="650" y="520" fill="var(--text-muted)" font-size="30">Machine Learning</text>
+      </g>
     </g>
 
-    <!-- Center Hub -->
-    <circle cx="400" cy="275" r="90" fill="url(#node-glow)"/>
-    <rect x="330" y="240" width="140" height="70" rx="10" fill="var(--surface)" stroke="var(--accent-blue)" stroke-width="2"/>
-    <text x="400" y="273" font-family="Manrope, sans-serif" font-size="15" font-weight="700" fill="var(--text-primary)" text-anchor="middle">INTELLIGENT</text>
-    <text x="400" y="293" font-family="Manrope, sans-serif" font-size="13" fill="var(--text-secondary)" text-anchor="middle">SYSTEMS</text>
-
-    <!-- Tech Nodes -->
-    <g font-family="'IBM Plex Mono', monospace" font-size="12" font-weight="600" text-anchor="middle">
-      
-      <rect x="150" y="130" width="100" height="40" rx="20" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)"/>
-      <text x="200" y="154" fill="var(--accent-blue)">PySpark</text>
-      
-      <rect x="550" y="130" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="600" y="154" fill="var(--text-primary)">Docker</text>
-
-      <rect x="150" y="400" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="200" y="424" fill="var(--text-primary)">MySQL</text>
-
-      <rect x="550" y="400" width="100" height="40" rx="20" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)"/>
-      <text x="600" y="424" fill="var(--accent-blue)">LangChain</text>
-
-      <rect x="350" y="60" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="400" y="84" fill="var(--text-primary)">FastAPI</text>
-
-      <rect x="350" y="460" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="400" y="484" fill="var(--text-primary)">Python</text>
-
-      <rect x="50" y="230" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="100" y="254" fill="var(--text-primary)">Delta Lake</text>
-
-      <rect x="650" y="230" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="700" y="254" fill="var(--text-primary)">ChromaDB</text>
-
-      <rect x="50" y="300" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="100" y="324" fill="var(--text-primary)">Kafka</text>
-
-      <rect x="650" y="300" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="700" y="324" fill="var(--text-primary)">LangGraph</text>
+    <!-- Floating Particles -->
+    <g fill="var(--accent-blue)" opacity="0.5">
+      <circle cx="140" cy="160" r="2.5" />
+      <circle cx="680" cy="130" r="2" />
+      <circle cx="720" cy="420" r="3" />
+      <circle cx="90" cy="280" r="2" />
+      <circle cx="450" cy="500" r="2.5" />
+      <circle cx="280" cy="220" r="1.5" />
+      <circle cx="550" cy="300" r="2" />
     </g>
-
-    <!-- Floating Concept Phrases -->
-    <g font-family="Manrope, sans-serif" font-size="11" font-weight="700" fill="var(--accent-brown)" text-anchor="middle" letter-spacing="1">
-      <text x="260" y="230" transform="rotate(-30, 260, 230)">DISTRIBUTED PIPELINES</text>
-      <text x="540" y="230" transform="rotate(30, 540, 230)">RETRIEVAL-AUGMENTED</text>
-      <text x="260" y="340" transform="rotate(30, 260, 340)">STREAM PROCESSING</text>
-      <text x="540" y="340" transform="rotate(-30, 540, 340)">MULTI-AGENT SECURITY</text>
-      <text x="400" y="160">RUNTIME MEDIATION</text>
-      <text x="400" y="405">AGENT ORCHESTRATION</text>
-    </g>
-
-    <!-- Connection Dots -->
-    <circle cx="200" cy="150" r="4" fill="var(--accent-blue)"/>
-    <circle cx="600" cy="150" r="4" fill="var(--border)"/>
-    <circle cx="200" cy="420" r="4" fill="var(--border)"/>
-    <circle cx="600" cy="420" r="4" fill="var(--accent-blue)"/>
-    <circle cx="100" cy="250" r="4" fill="var(--border)"/>
-    <circle cx="700" cy="250" r="4" fill="var(--border)"/>
-    <circle cx="100" cy="320" r="4" fill="var(--border)"/>
-    <circle cx="700" cy="320" r="4" fill="var(--border)"/>
-    <circle cx="400" cy="80" r="4" fill="var(--border)"/>
-    <circle cx="400" cy="480" r="4" fill="var(--border)"/>
   </svg>
-  <figcaption><span>01 / Ecosystem of tools &amp; frameworks</span><a href="#skills">Explore the toolkit <span aria-hidden="true">↗</span></a><small>Conceptual mind map</small></figcaption></figure>`;
+  <figcaption><span>01 / Technologies</span><a href="#skills">Explore the toolkit <span aria-hidden="true">↗</span></a><small>Core stack</small></figcaption></figure>`;
 }
 
 export function projectVisual(id: string) {
