@@ -2,93 +2,114 @@
 export function workstation() {
   return `<figure class="workstation">
   <svg viewBox="0 0 800 550" role="img" aria-labelledby="workstation-title workstation-desc">
-    <title id="workstation-title">A developer’s workspace for intelligent systems</title>
-    <desc id="workstation-desc">A premium conceptual illustration of a computer displaying a pipeline, surrounded by floating tech icons.</desc>
+    <title id="workstation-title">An ecosystem of tools and concepts</title>
+    <desc id="workstation-desc">A conceptual network map displaying technologies like Docker, PySpark, MySQL, and Python interconnected with data pipelines.</desc>
     
     <defs>
-      <linearGradient id="screen-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="var(--surface-blue)"/>
-        <stop offset="100%" stop-color="var(--surface)"/>
+      <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.15"/>
+        <stop offset="100%" stop-color="var(--accent-blue)" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="var(--accent-brown)" stop-opacity="0.6"/>
       </linearGradient>
-      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="6" result="blur"/>
-        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-      </filter>
+      <pattern id="dot-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="var(--border)" opacity="0.6"/>
+      </pattern>
     </defs>
 
-    <!-- Floating Tech Elements (Background) -->
-    <g font-family="'IBM Plex Mono', monospace" font-size="11" fill="var(--text-secondary)" opacity="0.6">
-      <text x="120" y="140" transform="rotate(-15, 120, 140)">Docker</text>
-      <text x="650" y="160" transform="rotate(10, 650, 160)">{ API }</text>
-      <text x="90" y="380" transform="rotate(5, 90, 380)">Git</text>
-      <text x="690" y="400" transform="rotate(-10, 690, 400)">PostgreSQL</text>
-    </g>
+    <!-- Background Grid -->
+    <rect width="100%" height="100%" fill="url(#dot-grid)" rx="8" />
 
-    <!-- Base / Desk reflection -->
-    <ellipse cx="400" cy="480" rx="300" ry="20" fill="var(--surface-blue-soft)" opacity="0.5" />
-
-    <!-- Isometric-ish Monitor Stand -->
-    <path d="M 370 410 L 430 410 L 440 470 L 360 470 Z" fill="var(--border)" stroke="var(--visual-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-    <path d="M 330 470 L 470 470 L 480 480 L 320 480 Z" fill="var(--surface-beige)" stroke="var(--visual-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-
-    <!-- Monitor Frame -->
-    <rect x="180" y="130" width="440" height="280" rx="12" fill="var(--screen-frame)" stroke="var(--visual-stroke)" stroke-width="2"/>
-    <rect x="190" y="140" width="420" height="260" rx="6" fill="url(#screen-grad)" stroke="var(--visual-stroke)" stroke-width="1"/>
-    
-    <!-- Screen Content: Pipeline -->
-    <g font-family="Manrope, sans-serif" text-anchor="middle">
-      <!-- Input -->
-      <rect x="230" y="170" width="340" height="36" rx="6" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
-      <text x="400" y="193" font-size="13" font-weight="600" fill="var(--text-primary)">TEXT INPUT / DATA</text>
+    <!-- Connecting Lines -->
+    <g stroke="url(#line-grad)" stroke-width="1.5" fill="none" opacity="0.7">
+      <!-- Main Hub Connections -->
+      <path d="M 400 275 L 200 150" />
+      <path d="M 400 275 L 600 150" />
+      <path d="M 400 275 L 200 420" />
+      <path d="M 400 275 L 600 420" />
       
-      <!-- Flow Arrow -->
-      <path d="M 400 206 L 400 220" stroke="var(--accent-blue)" stroke-width="2" marker-end="url(#arrow)"/>
-
-      <!-- NLP / LLM -->
-      <rect x="230" y="220" width="340" height="36" rx="6" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)" stroke-width="1.5"/>
-      <text x="400" y="243" font-size="13" font-weight="600" fill="var(--accent-blue)">NLP &amp; LLM PROCESSING</text>
-
-      <!-- Flow Arrow -->
-      <path d="M 400 256 L 400 270" stroke="var(--accent-blue)" stroke-width="2"/>
-
-      <!-- Agents & Security -->
-      <rect x="230" y="270" width="160" height="46" rx="6" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="310" y="293" font-size="12" font-weight="600" fill="var(--text-primary)">MULTI-AGENT</text>
-      <text x="310" y="307" font-size="10" fill="var(--text-secondary)">Coordination</text>
-
-      <rect x="410" y="270" width="160" height="46" rx="6" fill="var(--surface)" stroke="var(--border)"/>
-      <text x="490" y="293" font-size="12" font-weight="600" fill="var(--text-primary)">SECURITY</text>
-      <text x="490" y="307" font-size="10" fill="var(--text-secondary)">Policy Enforcement</text>
-
-      <!-- Connectors -->
-      <path d="M 310 316 L 310 330 M 490 316 L 490 330 M 310 330 L 490 330 M 400 330 L 400 340" stroke="var(--accent-blue)" stroke-width="2" fill="none"/>
-
-      <!-- Output -->
-      <rect x="230" y="340" width="340" height="36" rx="6" fill="var(--surface-beige)" stroke="var(--border)"/>
-      <text x="400" y="363" font-size="13" font-weight="600" fill="var(--text-primary)">VERIFIED OUTPUT / ACTION</text>
-    </g>
-
-    <!-- Floating Tech Elements (Foreground) -->
-    <g filter="url(#glow)">
-      <!-- Python Badge -->
-      <g transform="translate(130, 220)">
-        <rect x="0" y="0" width="70" height="28" rx="14" fill="var(--surface)" stroke="var(--visual-stroke)"/>
-        <text x="35" y="18" font-family="Manrope, sans-serif" font-size="11" font-weight="600" fill="var(--accent-blue)" text-anchor="middle">Python</text>
-      </g>
+      <!-- Outer Node Connections -->
+      <path d="M 200 150 L 100 250" />
+      <path d="M 600 150 L 700 250" />
+      <path d="M 200 420 L 100 320" />
+      <path d="M 600 420 L 700 320" />
+      <path d="M 400 275 L 400 80" />
+      <path d="M 400 275 L 400 480" />
+      <path d="M 200 150 L 400 80" />
+      <path d="M 600 150 L 400 80" />
+      <path d="M 200 420 L 400 480" />
+      <path d="M 600 420 L 400 480" />
       
-      <!-- Data Badge -->
-      <g transform="translate(620, 260)">
-        <rect x="0" y="0" width="70" height="28" rx="14" fill="var(--surface)" stroke="var(--visual-stroke)"/>
-        <text x="35" y="18" font-family="Manrope, sans-serif" font-size="11" font-weight="600" fill="var(--accent-brown)" text-anchor="middle">Data</text>
-      </g>
+      <!-- Extra cross-links -->
+      <path d="M 100 250 L 100 320" stroke-dasharray="4 4" />
+      <path d="M 700 250 L 700 320" stroke-dasharray="4 4" />
     </g>
 
-    <!-- Decorative elements -->
-    <circle cx="210" cy="155" r="3" fill="var(--text-muted)"/>
-    <circle cx="222" cy="155" r="3" fill="var(--text-muted)"/>
-    <circle cx="234" cy="155" r="3" fill="var(--text-muted)"/>
+    <!-- Center Hub -->
+    <circle cx="400" cy="275" r="90" fill="url(#node-glow)"/>
+    <rect x="330" y="240" width="140" height="70" rx="10" fill="var(--surface)" stroke="var(--accent-blue)" stroke-width="2"/>
+    <text x="400" y="273" font-family="Manrope, sans-serif" font-size="15" font-weight="700" fill="var(--text-primary)" text-anchor="middle">INTELLIGENT</text>
+    <text x="400" y="293" font-family="Manrope, sans-serif" font-size="13" fill="var(--text-secondary)" text-anchor="middle">SYSTEMS</text>
+
+    <!-- Tech Nodes -->
+    <g font-family="'IBM Plex Mono', monospace" font-size="12" font-weight="600" text-anchor="middle">
+      
+      <rect x="150" y="130" width="100" height="40" rx="20" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)"/>
+      <text x="200" y="154" fill="var(--accent-blue)">PySpark</text>
+      
+      <rect x="550" y="130" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
+      <text x="600" y="154" fill="var(--text-primary)">Docker</text>
+
+      <rect x="150" y="400" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
+      <text x="200" y="424" fill="var(--text-primary)">MySQL</text>
+
+      <rect x="550" y="400" width="100" height="40" rx="20" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)"/>
+      <text x="600" y="424" fill="var(--accent-blue)">LangChain</text>
+
+      <rect x="350" y="60" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
+      <text x="400" y="84" fill="var(--text-primary)">FastAPI</text>
+
+      <rect x="350" y="460" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
+      <text x="400" y="484" fill="var(--text-primary)">Python</text>
+
+      <rect x="50" y="230" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
+      <text x="100" y="254" fill="var(--text-primary)">Delta Lake</text>
+
+      <rect x="650" y="230" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
+      <text x="700" y="254" fill="var(--text-primary)">ChromaDB</text>
+
+      <rect x="50" y="300" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
+      <text x="100" y="324" fill="var(--text-primary)">Kafka</text>
+
+      <rect x="650" y="300" width="100" height="40" rx="20" fill="var(--surface)" stroke="var(--border)"/>
+      <text x="700" y="324" fill="var(--text-primary)">LangGraph</text>
+    </g>
+
+    <!-- Floating Concept Phrases -->
+    <g font-family="Manrope, sans-serif" font-size="11" font-weight="700" fill="var(--accent-brown)" text-anchor="middle" letter-spacing="1">
+      <text x="260" y="230" transform="rotate(-30, 260, 230)">DISTRIBUTED PIPELINES</text>
+      <text x="540" y="230" transform="rotate(30, 540, 230)">RETRIEVAL-AUGMENTED</text>
+      <text x="260" y="340" transform="rotate(30, 260, 340)">STREAM PROCESSING</text>
+      <text x="540" y="340" transform="rotate(-30, 540, 340)">MULTI-AGENT SECURITY</text>
+      <text x="400" y="160">RUNTIME MEDIATION</text>
+      <text x="400" y="405">AGENT ORCHESTRATION</text>
+    </g>
+
+    <!-- Connection Dots -->
+    <circle cx="200" cy="150" r="4" fill="var(--accent-blue)"/>
+    <circle cx="600" cy="150" r="4" fill="var(--border)"/>
+    <circle cx="200" cy="420" r="4" fill="var(--border)"/>
+    <circle cx="600" cy="420" r="4" fill="var(--accent-blue)"/>
+    <circle cx="100" cy="250" r="4" fill="var(--border)"/>
+    <circle cx="700" cy="250" r="4" fill="var(--border)"/>
+    <circle cx="100" cy="320" r="4" fill="var(--border)"/>
+    <circle cx="700" cy="320" r="4" fill="var(--border)"/>
+    <circle cx="400" cy="80" r="4" fill="var(--border)"/>
+    <circle cx="400" cy="480" r="4" fill="var(--border)"/>
   </svg>
-  <figcaption><span>01 / A workspace for intelligent systems</span><a href="#skills">Explore the toolkit <span aria-hidden="true">↗</span></a><small>Conceptual illustration</small></figcaption></figure>`;
+  <figcaption><span>01 / Ecosystem of tools &amp; frameworks</span><a href="#skills">Explore the toolkit <span aria-hidden="true">↗</span></a><small>Conceptual mind map</small></figcaption></figure>`;
 }
 
 export function projectVisual(id: string) {
