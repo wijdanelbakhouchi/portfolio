@@ -1,104 +1,161 @@
 export function workstation() {
   return `<figure class="workstation">
   <svg viewBox="0 0 800 550" role="img" aria-labelledby="workstation-title workstation-desc">
-    <title id="workstation-title">Tech Stack Cloud</title>
+    <title id="workstation-title">3D Tech Sphere</title>
     
     <defs>
-      <filter id="blur-sm" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="2.5" />
-      </filter>
-      <filter id="blur-md" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="5" />
-      </filter>
-      <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="var(--surface-blue)" stop-opacity="0.3"/>
+      <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.3"/>
+        <stop offset="80%" stop-color="var(--accent-blue)" stop-opacity="0.05"/>
         <stop offset="100%" stop-color="var(--surface)" stop-opacity="0"/>
       </radialGradient>
+      <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.8"/>
+        <stop offset="40%" stop-color="var(--accent-blue)" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="var(--accent-blue)" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="blur-node">
+        <feGaussianBlur stdDeviation="3" />
+      </filter>
     </defs>
 
+    <!-- Deep Space Background -->
     <rect width="100%" height="100%" fill="transparent" />
     
-    <circle cx="400" cy="275" r="300" fill="url(#glow)"/>
+    <!-- Outer Sphere Wireframe -->
+    <g stroke="var(--accent-blue)" stroke-width="1" fill="none" opacity="0.25">
+      <circle cx="400" cy="275" r="220" />
+      <!-- Latitudes -->
+      <ellipse cx="400" cy="275" rx="220" ry="60" />
+      <ellipse cx="400" cy="275" rx="220" ry="140" />
+      <!-- Longitudes -->
+      <ellipse cx="400" cy="275" rx="60" ry="220" />
+      <ellipse cx="400" cy="275" rx="140" ry="220" />
+      <!-- Diagonals -->
+      <ellipse cx="400" cy="275" rx="220" ry="80" transform="rotate(45 400 275)" />
+      <ellipse cx="400" cy="275" rx="220" ry="80" transform="rotate(-45 400 275)" />
+    </g>
 
-    <g font-family="'Manrope', sans-serif" font-weight="700" text-anchor="middle">
+    <!-- Inner Core Wireframe -->
+    <g stroke="var(--accent-blue)" stroke-width="1.5" fill="none" opacity="0.6">
+      <circle cx="400" cy="275" r="70" fill="url(#core-glow)" />
+      <ellipse cx="400" cy="275" rx="70" ry="25" />
+      <ellipse cx="400" cy="275" rx="70" ry="50" />
+      <ellipse cx="400" cy="275" rx="25" ry="70" />
+      <ellipse cx="400" cy="275" rx="50" ry="70" />
+      <!-- Inner Diagonals -->
+      <ellipse cx="400" cy="275" rx="70" ry="25" transform="rotate(45 400 275)" />
+      <ellipse cx="400" cy="275" rx="70" ry="25" transform="rotate(-45 400 275)" />
+    </g>
+    
+    <!-- Core Highlight Glows (The shiny spots) -->
+    <circle cx="370" cy="240" r="12" fill="var(--accent-blue)" opacity="0.8" filter="url(#blur-node)" />
+    <circle cx="430" cy="310" r="18" fill="var(--accent-blue)" opacity="0.5" filter="url(#blur-node)" />
+
+    <!-- Connecting Callout Lines -->
+    <g stroke="var(--border)" stroke-width="1.5" fill="none" opacity="0.8">
+      <!-- To PySpark -->
+      <polyline points="240,140 190,100 160,100" />
+      <!-- To Delta Lake -->
+      <polyline points="200,275 140,275" />
+      <!-- To Python -->
+      <polyline points="260,400 200,440 170,440" />
       
-      <!-- FOREGROUND (Sharp, in focus) -->
-      <!-- PySpark -->
-      <g transform="translate(250, 150)">
-        <rect x="-70" y="-23" width="140" height="46" rx="23" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)" stroke-width="1.5"/>
-        <text y="5" fill="var(--accent-blue)" font-size="16">PySpark</text>
-      </g>
+      <!-- To Docker -->
+      <polyline points="560,140 610,100 640,100" />
+      <!-- To LangChain -->
+      <polyline points="600,275 660,275" />
+      <!-- To FastAPI -->
+      <polyline points="540,400 600,440 630,440" />
 
-      <!-- Docker -->
-      <g transform="translate(550, 180)">
-        <rect x="-65" y="-23" width="130" height="46" rx="23" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
-        <text y="5" fill="var(--text-primary)" font-size="16">Docker</text>
-      </g>
+      <!-- Abstract Labels Lines -->
+      <polyline points="360,220 300,160 220,160" stroke="var(--accent-blue)" opacity="0.5" />
+      <polyline points="450,450 420,490 320,490" stroke="var(--accent-blue)" opacity="0.5" />
+      <polyline points="580,350 630,320 650,320" stroke="var(--accent-blue)" opacity="0.5" />
+    </g>
+
+    <!-- Glowing Nodes on Orbits -->
+    <g>
+      <circle cx="240" cy="140" r="22" fill="url(#node-glow)" />
+      <circle cx="240" cy="140" r="7" fill="var(--accent-blue)" />
+      
+      <circle cx="200" cy="275" r="22" fill="url(#node-glow)" />
+      <circle cx="200" cy="275" r="7" fill="var(--accent-blue)" />
+      
+      <circle cx="260" cy="400" r="22" fill="url(#node-glow)" />
+      <circle cx="260" cy="400" r="7" fill="var(--accent-blue)" />
+      
+      <circle cx="560" cy="140" r="22" fill="url(#node-glow)" />
+      <circle cx="560" cy="140" r="7" fill="var(--accent-blue)" />
+      
+      <circle cx="600" cy="275" r="22" fill="url(#node-glow)" />
+      <circle cx="600" cy="275" r="7" fill="var(--accent-blue)" />
+      
+      <circle cx="540" cy="400" r="22" fill="url(#node-glow)" />
+      <circle cx="540" cy="400" r="7" fill="var(--accent-blue)" />
+    </g>
+
+    <!-- Callout Boxes & Text -->
+    <g font-family="'IBM Plex Mono', monospace" font-size="11" font-weight="600" fill="var(--text-primary)" letter-spacing="1">
+      
+      <!-- PySpark -->
+      <rect x="20" y="85" width="140" height="30" rx="4" fill="var(--surface)" stroke="var(--border)" />
+      <circle cx="35" cy="100" r="3" fill="var(--accent-blue)" />
+      <text x="48" y="104">PYSPARK</text>
+
+      <!-- Delta Lake -->
+      <rect x="0" y="260" width="140" height="30" rx="4" fill="var(--surface)" stroke="var(--border)" />
+      <circle cx="15" cy="275" r="3" fill="var(--accent-blue)" />
+      <text x="28" y="279">DELTA LAKE</text>
 
       <!-- Python -->
-      <g transform="translate(400, 260)">
-        <rect x="-80" y="-25" width="160" height="50" rx="25" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
-        <text y="6" fill="var(--text-primary)" font-size="18">Python</text>
-      </g>
+      <rect x="30" y="425" width="140" height="30" rx="4" fill="var(--surface)" stroke="var(--border)" />
+      <circle cx="45" cy="440" r="3" fill="var(--accent-blue)" />
+      <text x="58" y="444">PYTHON</text>
 
-      <!-- MySQL -->
-      <g transform="translate(260, 370)">
-        <rect x="-65" y="-23" width="130" height="46" rx="23" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
-        <text y="5" fill="var(--text-primary)" font-size="16">MySQL</text>
-      </g>
+      <!-- Docker -->
+      <rect x="640" y="85" width="140" height="30" rx="4" fill="var(--surface)" stroke="var(--border)" />
+      <circle cx="655" cy="100" r="3" fill="var(--accent-blue)" />
+      <text x="668" y="104">DOCKER</text>
 
       <!-- LangChain -->
-      <g transform="translate(540, 350)">
-        <rect x="-75" y="-23" width="150" height="46" rx="23" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)" stroke-width="1.5"/>
-        <text y="5" fill="var(--accent-blue)" font-size="16">LangChain</text>
-      </g>
+      <rect x="660" y="260" width="140" height="30" rx="4" fill="var(--surface)" stroke="var(--border)" />
+      <circle cx="675" cy="275" r="3" fill="var(--accent-blue)" />
+      <text x="688" y="279">LANGCHAIN</text>
 
-      <!-- MIDGROUND (Slightly smaller, 0.7 opacity, no border, just text) -->
-      <g opacity="0.8">
-        <text x="120" y="240" fill="var(--text-primary)" font-size="16">Delta Lake</text>
-        <text x="670" y="270" fill="var(--text-primary)" font-size="16">FastAPI</text>
-        <text x="400" y="120" fill="var(--text-primary)" font-size="16">Kafka</text>
-        <text x="420" y="420" fill="var(--text-primary)" font-size="16">ChromaDB</text>
-        <text x="160" y="450" fill="var(--text-primary)" font-size="16">TypeScript</text>
-        <text x="680" y="450" fill="var(--text-primary)" font-size="16">React</text>
-      </g>
+      <!-- FastAPI -->
+      <rect x="630" y="425" width="140" height="30" rx="4" fill="var(--surface)" stroke="var(--border)" />
+      <circle cx="645" cy="440" r="3" fill="var(--accent-blue)" />
+      <text x="658" y="444">FASTAPI</text>
 
-      <!-- BACKGROUND (Blurred, muted, small) -->
-      <g opacity="0.6" filter="url(#blur-sm)">
-        <text x="150" y="100" fill="var(--text-muted)" font-size="18">Airflow</text>
-        <text x="650" y="90" fill="var(--text-muted)" font-size="18">Kubernetes</text>
-        <text x="80" y="340" fill="var(--text-muted)" font-size="18">PostgreSQL</text>
-        <text x="730" y="360" fill="var(--text-muted)" font-size="18">LLMs</text>
-        <text x="520" y="480" fill="var(--text-muted)" font-size="18">AWS</text>
-        <text x="280" y="500" fill="var(--text-muted)" font-size="18">Git</text>
-        <text x="400" y="190" fill="var(--text-muted)" font-size="17">Java</text>
-        <text x="320" y="300" fill="var(--text-muted)" font-size="17">C++</text>
-        <text x="500" y="300" fill="var(--text-muted)" font-size="17">SQL</text>
-      </g>
+      <!-- Abstract Labels -->
+      <rect x="40" y="145" width="180" height="30" rx="4" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)" opacity="0.9" />
+      <circle cx="55" cy="160" r="3" fill="var(--accent-blue)" />
+      <text x="68" y="164" fill="var(--accent-blue)">INTELLIGENT CORE</text>
 
-      <!-- DEEP BACKGROUND (Heavy blur, big text) -->
-      <g opacity="0.25" filter="url(#blur-md)">
-        <text x="250" y="60" fill="var(--text-muted)" font-size="32">Data Engineering</text>
-        <text x="620" y="150" fill="var(--text-muted)" font-size="36">RAG</text>
-        <text x="120" y="180" fill="var(--text-muted)" font-size="28">Security</text>
-        <text x="720" y="220" fill="var(--text-muted)" font-size="28">CI/CD</text>
-        <text x="180" y="520" fill="var(--text-muted)" font-size="34">Multi-Agent</text>
-        <text x="650" y="520" fill="var(--text-muted)" font-size="30">Machine Learning</text>
-      </g>
+      <rect x="120" y="475" width="200" height="30" rx="4" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)" opacity="0.9" />
+      <circle cx="135" cy="490" r="3" fill="var(--accent-blue)" />
+      <text x="148" y="494" fill="var(--accent-blue)">MULTI-AGENT RUNTIME</text>
+      
+      <rect x="650" y="305" width="210" height="30" rx="4" fill="var(--surface-blue-soft)" stroke="var(--accent-blue)" opacity="0.9" />
+      <text x="665" y="324" fill="var(--accent-blue)">SECURITY BOUNDARY</text>
+      <text x="795" y="324" fill="var(--text-primary)">06</text>
     </g>
 
-    <!-- Floating Particles -->
-    <g fill="var(--accent-blue)" opacity="0.5">
-      <circle cx="140" cy="160" r="2.5" />
-      <circle cx="680" cy="130" r="2" />
-      <circle cx="720" cy="420" r="3" />
-      <circle cx="90" cy="280" r="2" />
-      <circle cx="450" cy="500" r="2.5" />
-      <circle cx="280" cy="220" r="1.5" />
-      <circle cx="550" cy="300" r="2" />
+    <!-- Starfield Background Particles -->
+    <g fill="var(--text-muted)" opacity="0.5">
+      <circle cx="100" cy="300" r="1" />
+      <circle cx="150" cy="80" r="1.5" />
+      <circle cx="700" cy="150" r="1" />
+      <circle cx="750" cy="400" r="1.5" />
+      <circle cx="300" cy="500" r="1" />
+      <circle cx="500" cy="60" r="1.5" />
+      <circle cx="50" cy="450" r="1" />
+      <circle cx="450" cy="530" r="1.5" />
     </g>
+
   </svg>
-  <figcaption><span>01 / Technologies</span><a href="#skills">Explore the toolkit <span aria-hidden="true">↗</span></a><small>Core stack</small></figcaption></figure>`;
+  <figcaption><span>01 / System Architecture</span><a href="#skills">Explore the toolkit <span aria-hidden="true">↗</span></a><small>Conceptual wireframe</small></figcaption></figure>`;
 }
 
 export function projectVisual(id: string) {
