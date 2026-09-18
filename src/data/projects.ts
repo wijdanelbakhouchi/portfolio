@@ -4,6 +4,7 @@ export interface ProjectItem {
   subtitle?: string;
   category: 'AI & LLM Security' | 'AI & LLMs' | 'Multi-Agent Systems' | 'Data Engineering' | 'Software Engineering';
   featured?: boolean;
+  spotlight?: boolean;
   summary: string;
   technologies: string[];
   githubUrl: string;
@@ -50,6 +51,7 @@ export const projectList: ProjectItem[] = [
   },
   {
     id: 'legal',
+    spotlight: true,
     title: 'Multi-Model Legal RAG (JuristAI Maroc)',
     subtitle: 'Comparative Legal Question Answering Grounded in Moroccan Labor Law',
     category: 'AI & LLMs',
@@ -108,6 +110,7 @@ export const projectList: ProjectItem[] = [
   },
   {
     id: 'streaming',
+    spotlight: true,
     title: 'Spark Streaming Crypto',
     subtitle: 'Real-Time Cryptocurrency Market & Media Sentiment Lambda Architecture',
     category: 'Data Engineering',

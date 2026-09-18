@@ -1,36 +1,8 @@
 import { initTheme } from './theme.ts';
-import { initLoader } from './loader.ts';
-import { ComputationalCore } from './core/ComputationalCore.ts';
+import { initContactForm } from './contact.ts';
 
-// Initialize light/dark theme immediately
 initTheme();
-
-// Initialize cinematic system initialization sequence
-initLoader();
-
-// Initialize The Secure Computational Core 3D centerpiece (reduced-motion safe)
-let core: ComputationalCore | null = null;
-if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  core = new ComputationalCore();
-}
-
-// Wire up skill categories to illuminate corresponding 3D agent nodes
-const skillGroups = document.querySelectorAll<HTMLElement>('.skill-group');
-skillGroups.forEach(group => {
-  const category = group.dataset.coreCategory || null;
-  group.addEventListener('mouseenter', () => {
-    core?.highlightCategory(category);
-  });
-  group.addEventListener('mouseleave', () => {
-    core?.highlightCategory(null);
-  });
-  group.addEventListener('focusin', () => {
-    core?.highlightCategory(category);
-  });
-  group.addEventListener('focusout', () => {
-    core?.highlightCategory(null);
-  });
-});
+initContactForm();
 
 const header = document.querySelector<HTMLElement>('.header')!;
 const menu = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
@@ -66,7 +38,7 @@ document.addEventListener('click', event => {
 document.addEventListener('focusin', event => {
   if (event.target instanceof Node && !header.contains(event.target)) setMenu(false);
 });
-matchMedia('(min-width: 1001px)').addEventListener('change', () => setMenu(false));
+matchMedia('(min-width: 1051px)').addEventListener('change', () => setMenu(false));
 
 const dialog = document.querySelector<HTMLDialogElement>('#project-dialog')!;
 const content = document.querySelector<HTMLElement>('#dialog-content')!;
@@ -123,10 +95,10 @@ filterButtons.forEach(btn => {
     const filter = btn.dataset.filter;
     filterButtons.forEach(b => {
       b.classList.remove('active');
-      b.setAttribute('aria-selected', 'false');
+      b.setAttribute('aria-pressed', 'false');
     });
     btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
+    btn.setAttribute('aria-pressed', 'true');
     projectCards.forEach(card => {
       const slug = card.dataset.categorySlug;
       if (filter === 'all' || slug === filter) {
@@ -140,103 +112,26 @@ filterButtons.forEach(btn => {
   });
 });
 
-// Active section observer for navigation highlights
+// Active section observer for navigation highlights and scroll reveal
 const observer = new IntersectionObserver(entries => {
   for (const entry of entries) {
     if (!entry.isIntersecting) continue;
+    entry.target.classList.add('in-view');
     navigation.querySelectorAll('a').forEach(link => {
       if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
   }
-}, { rootMargin: '-10% 0px -65% 0px' });
-document.querySelectorAll('main > section[id]').forEach(section => observer.observe(section));
+}, { rootMargin: '-10% 0px -20% 0px' });
+document.querySelectorAll('main > section').forEach(section => observer.observe(section));
 
-// Contact Form Handler with authentic mailto client dispatch & validation
-const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
-if (contactForm) {
-  const nameInput = document.getElementById('contact-name') as HTMLInputElement;
-  const emailInput = document.getElementById('contact-email') as HTMLInputElement;
-  const subjectInput = document.getElementById('contact-subject') as HTMLInputElement;
-  const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
-  const statusEl = document.getElementById('form-status') as HTMLElement;
 
-  const nameError = document.getElementById('name-error') as HTMLElement;
-  const emailError = document.getElementById('email-error') as HTMLElement;
-  const subjectError = document.getElementById('subject-error') as HTMLElement;
-  const messageError = document.getElementById('message-error') as HTMLElement;
-
-  function clearErrors() {
-    [nameError, emailError, subjectError, messageError].forEach(el => {
-      if (el) el.textContent = '';
-    });
-    [nameInput, emailInput, subjectInput, messageInput].forEach(el => {
-      if (el) el.classList.remove('input-invalid');
-    });
-    if (statusEl) {
-      statusEl.textContent = '';
-      statusEl.className = 'form-status';
-    }
+function revealHashProject() {
+  const target = document.getElementById(location.hash.slice(1));
+  if (target?.matches('.project[hidden]')) {
+    document.querySelector<HTMLButtonElement>('[data-filter="all"]')?.click();
+    target.scrollIntoView();
   }
-
-  contactForm.addEventListener('submit', (e: Event) => {
-    e.preventDefault();
-    clearErrors();
-
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const subject = subjectInput.value.trim();
-    const message = messageInput.value.trim();
-
-    let hasError = false;
-
-    if (!name) {
-      nameError.textContent = 'Please enter your name.';
-      nameInput.classList.add('input-invalid');
-      if (!hasError) nameInput.focus();
-      hasError = true;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
-      emailError.textContent = 'Please enter your email address.';
-      emailInput.classList.add('input-invalid');
-      if (!hasError) emailInput.focus();
-      hasError = true;
-    } else if (!emailRegex.test(email)) {
-      emailError.textContent = 'Please enter a valid email address.';
-      emailInput.classList.add('input-invalid');
-      if (!hasError) emailInput.focus();
-      hasError = true;
-    }
-
-    if (!subject) {
-      subjectError.textContent = 'Please enter a subject.';
-      subjectInput.classList.add('input-invalid');
-      if (!hasError) subjectInput.focus();
-      hasError = true;
-    }
-
-    if (!message) {
-      messageError.textContent = 'Please enter your message.';
-      messageInput.classList.add('input-invalid');
-      if (!hasError) messageInput.focus();
-      hasError = true;
-    }
-
-    if (hasError) return;
-
-    // Direct authentic dispatch via user's email client
-    const mailtoUrl = `mailto:wijdane.elbakhouchi24@gmail.com?subject=${encodeURIComponent(`[Portfolio] ${subject}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-
-    statusEl.textContent = 'Opening your email client to transmit message...';
-    statusEl.className = 'form-status status-active';
-
-    setTimeout(() => {
-      window.location.href = mailtoUrl;
-      statusEl.textContent = 'Email client triggered. If it did not open automatically, you can write directly to wijdane.elbakhouchi24@gmail.com.';
-      statusEl.className = 'form-status status-success';
-      contactForm.reset();
-    }, 400);
-  });
 }
+window.addEventListener('hashchange', revealHashProject);
+revealHashProject();

@@ -87,6 +87,7 @@ test('mobile menu, disclosures, reduced motion and theme toggle', async ({ page 
 });
 
 test('contact form validates required inputs and supports message dispatch', async ({ page }) => {
+  await page.route('**/api/contact', route => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) }));
   await page.goto('/');
   const submitBtn = page.locator('.form-submit');
   await submitBtn.click();
@@ -111,14 +112,18 @@ test('contact form validates required inputs and supports message dispatch', asy
   await page.locator('#contact-message').fill('Hello Wijdane, we are impressed by AgentShield.');
   await submitBtn.click();
   await expect(page.locator('#form-status')).toBeVisible();
+  await expect(page.locator('#form-status')).toContainText('accepted for delivery');
+  await expect(page.locator('#contact-message')).toHaveValue('');
 });
 
 const heroViewports = [
+  { width: 2560, height: 1440 },
   { width: 1920, height: 1080 },
+  { width: 1600, height: 900 },
   { width: 1536, height: 864 },
   { width: 1440, height: 900 },
   { width: 1366, height: 768 },
-  { width: 1024, height: 1366 },
+  { width: 1024, height: 768 },
   { width: 768, height: 1024 },
   { width: 430, height: 932 },
   { width: 390, height: 844 },
@@ -133,6 +138,14 @@ for (const vp of heroViewports) {
     const aboutBox = await page.locator('#about').boundingBox();
     expect(aboutBox).not.toBeNull();
     expect(aboutBox.y).toBeGreaterThanOrEqual(vp.height - 5);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+    if (vp.width >= 1024) {
+      const hero = await page.locator('#home').boundingBox();
+      expect(hero.width).toBeGreaterThanOrEqual(Math.min(vp.width * .9, 1900));
+      const nav = await page.locator('.nav-layout').boundingBox();
+      expect(Math.abs(nav.x - hero.x)).toBeLessThan(1);
+      expect(aboutBox.y).toBeLessThanOrEqual(vp.height + 10);
+    }
   });
 }
 
@@ -148,8 +161,9 @@ for (const width of [320, 375, 390, 412, 700, 768, 820, 1000, 1024, 1366, 1440, 
   });
 }
 
-for (const width of [390, 1440]) {
-  test(`WCAG AA including expanded content and modal at ${width}px`, async ({ page }) => {
+for (const theme of ['light', 'dark']) for (const width of [390, 1440]) {
+  test(`WCAG AA including expanded content and modal at ${width}px in ${theme}`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('/');
     await page.locator('.disclosure > summary, .skill-group > summary').evaluateAll(nodes => nodes.forEach(node => node.click()));
