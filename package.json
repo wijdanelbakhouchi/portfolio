@@ -14,16 +14,12 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "dependencies": {
-    "three": "^0.186.0"
-  },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
     "@eslint/js": "^10.0.1",
     "@fontsource/ibm-plex-mono": "^5.3.0",
     "@fontsource/manrope": "^5.3.0",
     "@playwright/test": "^1.63.0",
-    "@types/three": "^0.186.0",
     "eslint": "^10.10.0",
     "gh-pages": "^6.3.0",
     "globals": "^17.12.0",

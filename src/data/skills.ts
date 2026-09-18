@@ -86,6 +86,8 @@ export const skillCategories: SkillCategory[] = [
       'InfluxDB (Time Series)',
       'Power BI & Power Query',
       'ETL Pipeline Architecture',
+      'Grafana',
+      'Trino',
     ],
   },
   {
@@ -95,6 +97,9 @@ export const skillCategories: SkillCategory[] = [
       'Shipping maintainable, tested, and containerized software systems with continuous integration and API design.',
     skills: [
       'FastAPI',
+      'React',
+      'SQLAlchemy',
+      'Java Swing & JDBC',
       'Docker & Docker Compose',
       'Git & GitHub Workflows',
       'RESTful API Development',

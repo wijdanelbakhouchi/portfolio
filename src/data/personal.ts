@@ -25,7 +25,7 @@ export const personalInfo: PersonalInfo = {
   headline: 'AI • Data Science • Software Engineering • LLM Security',
   subheadline: 'Intelligence, with boundaries.',
   mission: 'I design intelligent, reliable, and secure software systems at the intersection of Artificial Intelligence, Data Science, and Cybersecurity.',
-  location: 'Rabat, Morocco',
+  location: 'Casablanca, Morocco',
   status: "Master's Student in Data Science & AI (IPS)",
   email: 'wijdane.elbakhouchi24@gmail.com',
   cvPath: '/documents/CV_ELBAKHOUCHI_Wijdane.pdf',

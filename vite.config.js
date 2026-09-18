@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from 'vite';
+import { renderPortfolio } from './src/render.ts';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'SITE_');
@@ -8,14 +9,14 @@ export default defineConfig(({ mode }) => {
     plugins: [
       {
         name: 'site-metadata',
-        transformIndexHtml(html) {
-          return html.replace(
+        transformIndexHtml: { order: 'pre', handler(html) {
+          return html.replace('<!-- PORTFOLIO -->', renderPortfolio()).replace(
             '<!-- DEPLOYMENT_METADATA -->',
             origin
               ? `<link rel="canonical" href="${origin}/"><meta property="og:url" content="${origin}/"><meta property="og:image" content="${origin}/images/social-card.png">`
               : ''
           );
-        },
+        } },
         generateBundle() {
           this.emitFile({
             type: 'asset',

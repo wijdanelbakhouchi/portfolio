@@ -30,7 +30,7 @@ export const professionalExperiences: ExperienceItem[] = [
     responsibilities: [
       'Built a centralized data monitoring and analytics pipeline using the Elastic Stack (ELK) to process and visualize large system telemetry datasets.',
       'Designed interactive Kibana dashboards to track and analyze critical metrics including incident error rates, system latency, and user activity trends.',
-      'Configured and implemented real-time alerting rules with ElastAlert for proactive anomaly detection, significantly reducing incident response times.',
+      'Configured real-time alerting rules with ElastAlert for proactive anomaly detection and incident response.',
       'Wrote data processing scripts in Python to validate and parse heterogeneous log formats prior to indexing.',
     ],
   },

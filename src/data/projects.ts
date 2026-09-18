@@ -1,8 +1,3 @@
-export interface ProjectDetail {
-  title: string;
-  content: string;
-}
-
 export interface ProjectItem {
   id: string;
   title: string;
@@ -11,7 +6,6 @@ export interface ProjectItem {
   featured?: boolean;
   summary: string;
   technologies: string[];
-  repository: string;
   githubUrl: string;
   demoUrl?: string;
   highlights: string[];
@@ -28,7 +22,6 @@ export const projectList: ProjectItem[] = [
     summary:
       'Flagship Master’s research project investigating runtime mediation, prompt injection defense, tool sandboxing, and policy enforcement across collaborative LLM agents.',
     technologies: ['Python', 'FastAPI', 'LangGraph', 'LangChain', 'SQLAlchemy', 'React', 'Docker'],
-    repository: 'AgentShield',
     githubUrl: 'https://github.com/wijdanelbakhouchi/AgentShield',
     highlights: [
       'Layered mediation intercepting user inputs, agent-to-agent messages, and tool invocations',
@@ -63,7 +56,6 @@ export const projectList: ProjectItem[] = [
     summary:
       'A document-grounded legal assistant comparing Mistral 7B and TinyLlama for Moroccan Labor Code (Code du Travail) queries in French and Arabic.',
     technologies: ['Python', 'PyTorch', 'Transformers', 'LangChain', 'ChromaDB', 'Gradio', 'bitsandbytes'],
-    repository: 'Multi-Model-Legal-RAG',
     githubUrl: 'https://github.com/wijdanelbakhouchi/Multi-Model-Legal-RAG',
     highlights: [
       'Chunking and vector search pipeline over Moroccan legal PDFs using ChromaDB',
@@ -93,7 +85,6 @@ export const projectList: ProjectItem[] = [
     summary:
       'A visual simulation platform comparing First-Come First-Served allocation with Vickrey auctions for autonomous parking agents on a Mesa grid.',
     technologies: ['Python', 'Mesa', 'FastAPI', 'React', 'Vite', 'Recharts'],
-    repository: 'Projet_MAS_Smart-Parking',
     githubUrl: 'https://github.com/wijdanelbakhouchi/Projet_MAS_Smart-Parking',
     highlights: [
       'Multi-agent environment modeling autonomous vehicles, parking spots, and district managers',
@@ -123,7 +114,6 @@ export const projectList: ProjectItem[] = [
     summary:
       'A streaming Big Data pipeline ingesting live crypto transactions and news sentiment, computing windowed aggregates and serving dual storage paths.',
     technologies: ['Python', 'PySpark', 'Kafka / Redpanda', 'Delta Lake', 'MinIO', 'InfluxDB', 'Grafana', 'Docker Compose'],
-    repository: 'Spark-Streaming-Crypto',
     githubUrl: 'https://github.com/wijdanelbakhouchi/Spark-Streaming-Crypto',
     highlights: [
       'Real-time stream ingestion with Kafka-compatible Redpanda and Python producers',
@@ -153,7 +143,6 @@ export const projectList: ProjectItem[] = [
     summary:
       'A Reinforcement Learning agent leveraging tabular Q-Learning to determine optimal pricing strategies across changing demand and inventory levels.',
     technologies: ['Python', 'NumPy', 'Pandas', 'Q-Learning', 'Matplotlib'],
-    repository: 'Retail-Dynamic-Pricing-RL',
     githubUrl: 'https://github.com/wijdanelbakhouchi/Retail-Dynamic-Pricing-RL',
     highlights: [
       'Custom environment modeling customer demand curves, price elasticity, and stock decay',
@@ -179,7 +168,6 @@ export const projectList: ProjectItem[] = [
     summary:
       'An end-to-end Business Intelligence pipeline cleaning, harmonizing, and migrating heterogeneous library datasets into the PMB SIGB database.',
     technologies: ['PHP', 'MySQL', 'Power BI', 'Power Query', 'Data Cleaning'],
-    repository: 'LibData-BI-Integration',
     githubUrl: 'https://github.com/wijdanelbakhouchi/LibData-BI-Integration',
     highlights: [
       'Automated extraction and normalization of multi-source CSV and Excel catalog data',
@@ -205,7 +193,6 @@ export const projectList: ProjectItem[] = [
     summary:
       'A desktop enterprise application designed to streamline student registration, professor assignments, and grading management using Java Swing and MySQL.',
     technologies: ['Java', 'Swing GUI', 'MySQL', 'JDBC', 'OOP Architecture'],
-    repository: 'Gestion-universitaire',
     githubUrl: 'https://github.com/wijdanelbakhouchi/Gestion-universitaire',
     highlights: [
       'Modular Object-Oriented architecture implementing full CRUD workflows',
@@ -224,12 +211,3 @@ export const projectList: ProjectItem[] = [
     ],
   },
 ];
-
-export const projectCategories = [
-  'All',
-  'AI & LLM Security',
-  'AI & LLMs',
-  'Multi-Agent Systems',
-  'Data Engineering',
-  'Software Engineering',
-] as const;

@@ -83,7 +83,7 @@ export const academicJourney: EducationStage[] = [
     period: '2019 – 2020',
     status: 'Completed',
     description:
-      'Prestigious and demanding national curriculum specializing in pure mathematics, physics, and analytical thinking, laying the foundation for scientific problem solving.',
+      'Scientific curriculum specializing in pure mathematics, physics, and analytical thinking, laying the foundation for scientific problem solving.',
     coursework: [
       'Advanced Calculus & Analysis',
       'Algebra & Arithmetic',
